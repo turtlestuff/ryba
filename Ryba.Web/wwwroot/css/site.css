@@ -1,7 +1,7 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 h1:focus {
@@ -16,6 +16,10 @@ a, .btn-link {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
+}
+
+.page {
+    height: 100vh;
 }
 
 .content {
@@ -63,3 +67,9 @@ a, .btn-link {
         content: "An error has occurred."
     }
 
+#components-reconnect-modal {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    color: white !important;
+    backdrop-filter: blur(10px);
+    opacity: 1 !important;
+}

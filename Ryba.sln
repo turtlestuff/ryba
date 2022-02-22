@@ -1,13 +1,12 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 25.0.1700.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryba.Web", "Ryba.Web\Ryba.Web.csproj", "{6C5DA2CB-9492-4982-95AE-7557F60C8B37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ryba.Web", "Ryba.Web\Ryba.Web.csproj", "{6C5DA2CB-9492-4982-95AE-7557F60C8B37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryba.Bot", "Ryba.Bot\Ryba.Bot.csproj", "{36307BC9-519B-43BB-B978-ACCE602EDC99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ryba.Bot", "Ryba.Bot\Ryba.Bot.csproj", "{36307BC9-519B-43BB-B978-ACCE602EDC99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ryba.Data", "Ryba.Data\Ryba.Data.csproj", "{1ACEC88D-2DD6-4AE9-9B0A-4ECB0C14D09D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ryba.Data", "Ryba.Data\Ryba.Data.csproj", "{1ACEC88D-2DD6-4AE9-9B0A-4ECB0C14D09D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

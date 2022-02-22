@@ -1,40 +1,28 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Ryba.Web</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
+﻿
+<div class="shadow-sm d-flex flex-column flex-shrink-0 p-3 text-white bg-black" style="width: 30%; max-width:270px; min-width:185px">
+	<a href="/" class="d-flex align-items-center text-white text-decoration-none">
+		<span class="fs-4">Ryba</span>
+	</a>
+	<hr />
+	<ul class="nav nav-pills flex-column mb-auto">
+		<li class="nav-item">
+			<NavLink class="nav-link text-white" href="" Match="NavLinkMatch.All">
+				<span class="oi oi-cog" aria-hidden="true"></span> Configuration
+			</NavLink>
+		</li>
+		<li class="nav-item">
+			<NavLink class="nav-link text-white" href="pins">
+				<span class="oi oi-pin" aria-hidden="true"></span> Pins
+			</NavLink>
+		</li>
+	</ul>
+	<hr />
+
+	<div class="d-flex align-items-center text-white text-decoration-none">
+		<img src="https://github.com/Vrabbers.png" alt="" width="32" height="32" class="rounded-circle me-2">
+		<strong class="text-truncate pe-1">Vrabbers</strong>
+		<button class="btn btn-outline-danger btn-sm ms-auto">Sign&nbsp;Out</button>
+	</div>
 </div>
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
-    </nav>
-</div>
-
-@code {
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}
-
+@code {}

@@ -16,15 +16,15 @@
 <body>
     @RenderBody()
 
-    <div id="blazor-error-ui">
+    <div id="blazor-error-ui" class="border bg-white border-danger text-danger shadow align-content-center">
         <environment include="Staging,Production">
             An error has occurred. This application may no longer respond until reloaded.
         </environment>
         <environment include="Development">
             An unhandled exception has occurred. See browser dev tools for details.
         </environment>
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
+        <a href="" class="btn btn-outline-primary btn-sm">Reload</a>
+        <a class="btn btn-outline-secondary btn-sm">Dismiss</a>
     </div>
 
     <script src="_framework/blazor.server.js"></script>
