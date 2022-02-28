@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Localizations\*.ftl" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.3" />
+    <PackageReference Include="Fluent.Net" Version="1.0.52" />
+
   </ItemGroup>
 </Project>

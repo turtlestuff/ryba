@@ -10,4 +10,12 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AspNet.Security.OAuth.Discord" Version="6.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ryba.Data\Ryba.Data.csproj" />
+  </ItemGroup>
+
 </Project>
