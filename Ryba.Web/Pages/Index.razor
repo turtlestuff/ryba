@@ -1,8 +1,10 @@
 ﻿@page "/"
+
 @inject FluentLocalizationService Tr
 
-<PageTitle>Index</PageTitle>
-
-<h1>@Tr["pt-BR", "web-welcome"]</h1>
-
-@Tr["pt-BR", "bot-info"]
+<AuthorizeView>
+	<Authorized>
+		@foreach(var claim in context.User.Claims) {
+					<p> @claim.Type: @claim.Value </p>}
+	</Authorized>
+</AuthorizeView>

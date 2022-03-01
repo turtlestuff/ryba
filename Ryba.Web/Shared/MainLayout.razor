@@ -2,12 +2,17 @@
 
 <PageTitle>Ryba</PageTitle>
 
-<div class="d-flex flex-row page text-white bg-dark">
-    @if (true) {
+<AuthorizeView>
+    <Authorized>
+        <div class="d-flex flex-row page text-white bg-dark">
         <NavMenu/>
-        <main class="content px-4">
-            @Body
-        </main>
-    }
-</div>
+            <main class="content px-4">
+                @Body 
+            </main>
+         </div>
+    </Authorized>
 
+    <NotAuthorized>
+        <Login/>
+    </NotAuthorized>
+</AuthorizeView>
