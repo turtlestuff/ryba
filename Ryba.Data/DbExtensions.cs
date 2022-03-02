@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Ryba.Data;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace Ryba.Bot.Extensions;
+namespace Ryba.Data;
 
 public static class DbExtensions
 {
@@ -15,7 +13,7 @@ public static class DbExtensions
         }
         else
         {
-            user = new RybaUser { Id = id, PortablePins = new() };
+            user = new RybaUser { Id = id, PortablePins = new(), Language = FluentLocalizationService.DefaultLanguage};
             db.Users.Add(user);
             return user;
         }

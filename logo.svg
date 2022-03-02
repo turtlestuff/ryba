@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="C:\stuff\projects\ryba\Ryba.Web\wwwroot\favicon.png"
+   inkscape:export-xdpi="6"
+   inkscape:export-ydpi="6"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     inkscape:document-units="px"
+     showgrid="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-object-midpoints="false"
+     inkscape:snap-global="true"
+     inkscape:zoom="2"
+     inkscape:cx="237.5"
+     inkscape:cy="282"
+     inkscape:window-width="1366"
+     inkscape:window-height="697"
+     inkscape:window-x="-1374"
+     inkscape:window-y="299"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g3593">
+    <inkscape:grid
+       type="xygrid"
+       id="grid31"
+       empspacing="16" />
+    <sodipodi:guide
+       position="160,256"
+       orientation="0,-1"
+       id="guide66" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter6703"
+       x="-0.037425125"
+       y="-0.05283547"
+       width="1.0748502"
+       height="1.1056709">
+      <feFlood
+         flood-opacity="0.466667"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood6693" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite6695" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="5.98802"
+         result="blur"
+         id="feGaussianBlur6697" />
+      <feOffset
+         dx="0"
+         dy="-2.77556e-17"
+         result="offset"
+         id="feOffset6699" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite6701" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g3593"
+       transform="translate(-10)">
+      <g
+         id="g5715"
+         style="filter:url(#filter6703)">
+        <path
+           id="path181"
+           style="fill:#eeaaff;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 138,256 74,144 v 112 126 z" />
+        <path
+           id="path3361"
+           style="fill:#eeaaff;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 394,371.19922 458,256 394,153.59961 Z" />
+        <path
+           id="path3359"
+           style="fill:#eeaaff;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 235.28125,400 H 378 V 157.37695 Z" />
+        <path
+           id="path3357"
+           style="fill:#eeaaff;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 218,149.33398 138,256 218,376 Z" />
+        <path
+           id="path3355"
+           style="fill:#eeaaff;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 376.71875,128 H 234 v 242.62305 z" />
+        <path
+           id="path3353"
+           style="fill:#bc5fd3;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 376.71875,128 234,370.62305 V 128 l -16,21.33398 V 376 l 16,24 h 1.28125 L 378,157.37695 V 400 l 16,-28.80078 V 153.59961 L 378,128 Z" />
+      </g>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 0,528 H 512"
+       id="path3505" />
+  </g>
+</svg>

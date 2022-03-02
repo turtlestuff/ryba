@@ -17,6 +17,7 @@ public class RybaContext : DbContext
 public class RybaUser
 {
     public string Id { get; set; }
+    public string Language { get; set; }
     public List<PortablePin> PortablePins { get; set; }
 }
 

@@ -1,10 +1,19 @@
 ﻿@page "/"
-
+@attribute [Authorize]
 @inject FluentLocalizationService Tr
+@inject IDbContextFactory<RybaContext> RybaCtxFac
+@inject NavigationManager Nav
+
 
 <AuthorizeView>
 	<Authorized>
-		@foreach(var claim in context.User.Claims) {
-					<p> @claim.Type: @claim.Value </p>}
+		<h2>@Tr[Language, "web-welcome"]</h2>
+		<span>@Tr[Language, "web-select-language"]</span>
+		<select @bind="Language" class="form-select">
+			@foreach (var c in Tr.AvailableLanguages) {
+				<option value="@c.Name">@c.NativeName (@c.Name)</option>
+			}
+		</select>
 	</Authorized>
 </AuthorizeView>
+

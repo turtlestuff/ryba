@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Ryba.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var locService = new FluentLocalizationService();
 // Add services to the container.
-builder.Services.AddSingleton(new FluentLocalizationService());
+builder.Services.AddSingleton(locService);
 builder.Services.AddDbContextFactory<RybaContext>(opt => opt.UseNpgsql(
                         builder.Configuration["Ryba:ConnectionString"],
                         opt => opt.MigrationsAssembly("Ryba.Data")));

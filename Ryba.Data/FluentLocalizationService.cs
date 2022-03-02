@@ -6,7 +6,7 @@ namespace Ryba.Data;
 
 public class FluentLocalizationService
 {
-    public const string DefaultLanguage = "en";
+    public static readonly string DefaultLanguage = "en";
 
     readonly CultureInfo fallbackLang = new(DefaultLanguage);
     readonly ImmutableDictionary<CultureInfo, MessageContext> messageContexts;
@@ -49,7 +49,7 @@ public class FluentLocalizationService
         }
     }
 
-    public IEnumerable<CultureInfo> AvailableLanguages => messageContexts.Keys;
+    public IEnumerable<CultureInfo> AvailableLanguages => messageContexts.Keys.OrderBy(c => c.Name);
 
     public FluentLocalizationService()
     {   

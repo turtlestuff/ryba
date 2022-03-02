@@ -1,0 +1,19 @@
+﻿@inject IDbContextFactory<RybaContext> RybaCtxFac
+
+@code {
+    [CascadingParameter]
+    protected Task<AuthenticationState> authStateTask { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authStateTask;
+        var user = authState.User;
+        var dbCtx = await RybaCtxFac.CreateDbContextAsync();
+        var dbUser = dbCtx.GetOrCreateUser(user.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+        Language = new CultureInfo(dbUser.Language);
+
+        await base.OnInitializedAsync();
+    }
+
+    protected CultureInfo Language { get; set; } = default!
+}
