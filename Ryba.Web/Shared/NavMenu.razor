@@ -1,25 +1,25 @@
-﻿<div class="shadow-lg d-flex flex-column flex-shrink-0 p-3 text-white bg-black" style="width: 30%; max-width:270px; min-width:185px">
-    <a href="/" class="d-flex align-items-center text-white text-decoration-none">
-        <img height=32 src="/logo.png" class="oi">
-        <span class="fs-4 ms-2">Ryba</span>
-    </a>
-    <hr />
-    <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-            <NavLink class="nav-link text-white" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-cog" aria-hidden="true"></span> Configuration
-            </NavLink>
-        </li>
-        <li class="nav-item">
-            <NavLink class="nav-link text-white" href="pins">
-                <span class="oi oi-pin" aria-hidden="true"></span> Pins
-            </NavLink>
-        </li>
-    </ul>
-    <hr />
+﻿<AuthorizeView>
+    <Authorized>
+        <div class="shadow-lg d-flex flex-column flex-shrink-0 p-3 text-white bg-black" style="width: 30%; max-width:270px; min-width:185px">
+            <a href="/" class="d-flex align-items-center text-white text-decoration-none">
+                <img height=32 src="/logo.png" class="oi">
+                <span class="fs-4 ms-2">Ryba</span>
+            </a>
+            <hr />
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <NavLink class="nav-link text-white" href="" Match="NavLinkMatch.All">
+                        <span class="oi oi-cog" aria-hidden="true"></span> Configuration
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link text-white" href="pins">
+                        <span class="oi oi-pin" aria-hidden="true"></span> Pins
+                    </NavLink>
+                </li>
+            </ul>
+            <hr />
 
-    <AuthorizeView>
-        <Authorized>
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="@context.User.FindFirst("urn:discord:avatar:url")?.Value" alt="" width="32" height="32" class="rounded-circle me-2">
@@ -31,6 +31,6 @@
                     <li><a class="dropdown-item" href="Account/Logout">Sign out</a></li>
                 </ul>
             </div>
-        </Authorized>
-    </AuthorizeView>
-</div>
+        </div>
+    </Authorized>
+</AuthorizeView>

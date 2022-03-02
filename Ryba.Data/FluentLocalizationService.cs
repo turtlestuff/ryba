@@ -11,6 +11,9 @@ public class FluentLocalizationService
     readonly CultureInfo fallbackLang = new(DefaultLanguage);
     readonly ImmutableDictionary<CultureInfo, MessageContext> messageContexts;
 
+    public string this[string id, params (string Argument, object Value)[] args]
+     => this[CultureInfo.CurrentCulture, id, args];
+
     public string this[string lang, string id, params (string Argument, object Value)[] args]
      => this[new CultureInfo(lang), id, args];
 

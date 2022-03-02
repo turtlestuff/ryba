@@ -3,11 +3,16 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Ryba.Data;
+using System.Globalization;
+
+CultureInfo.DefaultThreadCurrentCulture = new(FluentLocalizationService.DefaultLanguage);
 
 var builder = WebApplication.CreateBuilder(args);
 var locService = new FluentLocalizationService();
 // Add services to the container.
 builder.Services.AddSingleton(locService);
+builder.Services.AddLocalization();
+
 builder.Services.AddDbContextFactory<RybaContext>(opt => opt.UseNpgsql(
                         builder.Configuration["Ryba:ConnectionString"],
                         opt => opt.MigrationsAssembly("Ryba.Data")));
@@ -44,6 +49,13 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+var supportedCultures = app.Services.GetRequiredService<FluentLocalizationService>().AvailableLanguages.Select(x => x.Name).ToArray();
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture(FluentLocalizationService.DefaultLanguage)
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+
+app.UseRequestLocalization(localizationOptions);
 
 app.UseAuthentication();
 app.UseAuthorization();

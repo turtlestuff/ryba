@@ -1,0 +1,44 @@
+﻿@inject IDbContextFactory<RybaContext> RybaCtxFac
+@inject NavigationManager Nav
+@code {
+    [CascadingParameter]
+    protected Task<AuthenticationState> AuthStateTask { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthStateTask;
+        var user = authState.User;
+        if (authState?.User.Identity?.IsAuthenticated ?? false)
+        {
+            var dbCtx = await RybaCtxFac.CreateDbContextAsync();
+            var dbUser = dbCtx.GetOrCreateUser(user);
+            await UpdateLang(dbUser.Language);
+        }
+        await base.OnInitializedAsync();
+    }
+
+    protected async Task UpdateLang(string lang)
+    {
+        var authState = await AuthStateTask;
+        var user = authState.User;
+        if (authState?.User.Identity?.IsAuthenticated ?? false)
+        {
+            var dbCtx = await RybaCtxFac.CreateDbContextAsync();
+            var dbUser = dbCtx.GetOrCreateUser(user);
+            dbUser.Language = lang;
+            dbCtx.Update(dbUser);
+            await dbCtx.SaveChangesAsync();
+        }
+        if (CultureInfo.CurrentCulture.Name != lang)
+        {
+            var uri = new Uri(Nav.Uri)
+                .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+            var cultureEscaped = Uri.EscapeDataString(lang);
+            var uriEscaped = Uri.EscapeDataString(uri);
+
+            Nav.NavigateTo(
+                $"Language/Set?culture={cultureEscaped}&redirectUri={uriEscaped}",
+                forceLoad: true);
+        }
+    }
+ }

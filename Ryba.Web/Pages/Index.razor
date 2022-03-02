@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inherits Base
 @attribute [Authorize]
 @inject FluentLocalizationService Tr
 @inject IDbContextFactory<RybaContext> RybaCtxFac
@@ -7,13 +8,17 @@
 
 <AuthorizeView>
 	<Authorized>
-		<h2>@Tr[Language, "web-welcome"]</h2>
-		<span>@Tr[Language, "web-select-language"]</span>
-		<select @bind="Language" class="form-select">
+		<h2>@Tr["web-welcome"]</h2>
+		<span>@CultureInfo.CurrentCulture</span>
+		<select class="form-select" value="@CultureInfo.CurrentCulture" 
+            @onchange="@(async e => await UpdateLang((string) e.Value!))">
 			@foreach (var c in Tr.AvailableLanguages) {
-				<option value="@c.Name">@c.NativeName (@c.Name)</option>
+				<option value="@c">@c.NativeName (@c.Name)</option>
 			}
 		</select>
 	</Authorized>
 </AuthorizeView>
 
+@code {
+   
+}

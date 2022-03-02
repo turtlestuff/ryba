@@ -1,18 +1,10 @@
 ﻿@inherits LayoutComponentBase
 
 <PageTitle>Ryba</PageTitle>
+<div class="d-flex flex-row page text-white bg-dark">
+    <NavMenu/>
+    <main class="m-4 w-100">
+        @Body 
+    </main>
+</div>
 
-<AuthorizeView>
-    <Authorized>
-        <div class="d-flex flex-row page text-white bg-dark">
-        <NavMenu/>
-            <main class="content px-4 w-100">
-                @Body 
-            </main>
-         </div>
-    </Authorized>
-
-    <NotAuthorized>
-        <Login/>
-    </NotAuthorized>
-</AuthorizeView>
