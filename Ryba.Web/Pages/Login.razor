@@ -1,6 +1,6 @@
 ﻿@page "/login"
-
+@inject FluentLocalizationService Tr
 <div class="d-flex flex-column text-white bg-dark justify-content-center align-items-center h-100">
-	<h3 class="text-center">Before we get things started...</h3>
-	<a href="Account/Login" class="btn btn-primary mt-2">Log in with Discord</a>
+	<h3 class="text-center">@Tr["web-before-get-started"]</h3>
+	<a href="Account/Login" class="btn btn-primary mt-2">@Tr["web-log-in-discord"]</a>
 </div>

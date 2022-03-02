@@ -4,14 +4,14 @@
 @inject FluentLocalizationService Tr
 @inject IDbContextFactory<RybaContext> RybaCtxFac
 @inject NavigationManager Nav
-
-
 <AuthorizeView>
 	<Authorized>
 		<h2>@Tr["web-welcome"]</h2>
-		<span>@CultureInfo.CurrentCulture</span>
-		<select class="form-select" value="@CultureInfo.CurrentCulture" 
+		<span>@Tr["web-select-language"]</span>
+		<select aria-label="@Tr["web-select-language"]"
+			class="form-select mt-1" value="@CultureInfo.CurrentCulture" 
             @onchange="@(async e => await UpdateLang((string) e.Value!))">
+
 			@foreach (var c in Tr.AvailableLanguages) {
 				<option value="@c">@c.NativeName (@c.Name)</option>
 			}

@@ -1,5 +1,6 @@
 ﻿@inject IDbContextFactory<RybaContext> RybaCtxFac
 @inject NavigationManager Nav
+@inject FluentLocalizationService Tr
 @code {
     [CascadingParameter]
     protected Task<AuthenticationState> AuthStateTask { get; set; } = default!;
@@ -17,8 +18,12 @@
         await base.OnInitializedAsync();
     }
 
-    protected async Task UpdateLang(string lang)
+    protected async Task UpdateLang(string incoming)
     {
+        var lang = incoming;
+        if (!Tr.AvailableLanguages.Select(x => x.Name).Any(x => x == incoming))
+            lang = FluentLocalizationService.DefaultLanguage;
+
         var authState = await AuthStateTask;
         var user = authState.User;
         if (authState?.User.Identity?.IsAuthenticated ?? false)
