@@ -4,7 +4,7 @@
     <Authorized>
         <div class="shadow-lg d-flex flex-column flex-shrink-0 p-3 text-white bg-black" style="width: 30%; max-width:270px; min-width:185px">
             <a href="/" class="d-flex align-items-center text-white text-decoration-none">
-                <img height=32 src="/logo.png" class="oi">
+                <img height=32 src="/logo.svg" class="oi">
                 <span class="fs-4 ms-2">@Tr["name"]</span>
             </a>
             <hr />
@@ -30,7 +30,12 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser" style="">
-                    <li><a class="dropdown-item" href="Account/Logout">@Tr["web-sign-out"]</a></li>
+                    <li>
+                        <a class="dropdown-item" href="Account/Logout">
+                            <span class="oi oi-account-logout"></span>
+                            @Tr["web-sign-out"]
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

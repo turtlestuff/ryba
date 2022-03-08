@@ -5,7 +5,10 @@ using Remora.Discord.API;
 using Remora.Discord.Commands.Extensions;
 using Remora.Discord.Commands.Services;
 using Remora.Discord.Hosting.Extensions;
+using Remora.Discord.Interactivity.Extensions;
+using Remora.Discord.Pagination.Extensions;
 using Remora.Rest.Core;
+using Ryba.Data;
 
 var host = Host.CreateDefaultBuilder(args)
     .AddDiscordService(services =>
@@ -17,7 +20,7 @@ var host = Host.CreateDefaultBuilder(args)
                    "No bot token has been provided. Set the Ryba__BotToken environment variable to a valid token.");
     })
     .ConfigureServices((context, services) => services
-                .AddDbContext<Ryba.Data.RybaContext>(
+                .AddDbContext<RybaContext>(
                     options => options.UseNpgsql(
                         context.Configuration.GetValue<string>("Ryba:ConnectionString"),
                         options => options.MigrationsAssembly("Ryba.Data")))
@@ -25,7 +28,10 @@ var host = Host.CreateDefaultBuilder(args)
                 .AddCommandTree()
                 .WithCommandGroup<Ryba.Bot.Commands.EvalCommands>()
                 .Finish()
-                .AddPostExecutionEvent<Ryba.Bot.PostEvent>())
+                .AddPostExecutionEvent<Ryba.Bot.PostEvent>()
+                .AddSingleton(new FluentLocalizationService())
+                .AddInteractivity()
+                .AddPagination())
     .ConfigureLogging(c => c.AddConsole()
         .AddFilter("System.Net.Http.HttpClient.*.LogicalHandler", LogLevel.Warning)
         .AddFilter("System.Net.Http.HttpClient.*.ClientHandler", LogLevel.Warning))

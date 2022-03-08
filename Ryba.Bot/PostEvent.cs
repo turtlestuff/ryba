@@ -18,6 +18,7 @@ class PostEvent : IPostExecutionEvent
         if (!commandResult.IsSuccess)
         {
             logger.LogError(new Exception(commandResult.Error?.Message), "An unexpected error occurred when executing a command.");
+            
         }
 
         // TODO: "This interaction failed"
