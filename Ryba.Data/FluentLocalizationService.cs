@@ -1,4 +1,5 @@
 ﻿using Fluent.Net;
+using Microsoft.Extensions.Logging;
 using System.Collections.Immutable;
 using System.Globalization;
 
@@ -8,6 +9,7 @@ public class FluentLocalizationService
 {
     public static readonly string DefaultLanguage = "en";
 
+    readonly ILogger<FluentLocalizationService>? logger;
     readonly CultureInfo fallbackLang = new(DefaultLanguage);
     readonly ImmutableDictionary<CultureInfo, MessageContext> messageContexts;
 
@@ -38,8 +40,10 @@ public class FluentLocalizationService
                     if (currentLang.Parent == CultureInfo.InvariantCulture)
                     {
                         if (currentLang == fallbackLang)
+                        {
+                            logger?.Log(LogLevel.Warning, $"Missing key [{id}]!");
                             return $"!{id}!" + string.Join("; ", args.Select(x => $"({x.Argument}: {x.Value})")); //no message found
-
+                        }
                         currentLang = fallbackLang;
                     }
                     else
@@ -53,6 +57,11 @@ public class FluentLocalizationService
     }
 
     public IEnumerable<CultureInfo> AvailableLanguages => messageContexts.Keys.OrderBy(c => c.Name);
+
+    public FluentLocalizationService(ILogger<FluentLocalizationService> logger) : this()
+    {
+        this.logger = logger;
+    }
 
     public FluentLocalizationService()
     {   

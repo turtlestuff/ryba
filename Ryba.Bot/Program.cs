@@ -20,18 +20,15 @@ var host = Host.CreateDefaultBuilder(args)
                    "No bot token has been provided. Set the Ryba__BotToken environment variable to a valid token.");
     })
     .ConfigureServices((context, services) => services
-                .AddDbContext<RybaContext>(
-                    options => options.UseNpgsql(
-                        context.Configuration.GetValue<string>("Ryba:ConnectionString"),
-                        options => options.MigrationsAssembly("Ryba.Data")))
-                .AddDiscordCommands(enableSlash: true)
-                .AddCommandTree()
-                .WithCommandGroup<Ryba.Bot.Commands.EvalCommands>()
-                .Finish()
-                .AddPostExecutionEvent<Ryba.Bot.PostEvent>()
-                .AddSingleton(new FluentLocalizationService())
-                .AddInteractivity()
-                .AddPagination())
+        .AddDbContext<RybaContext>(
+            options => options.UseNpgsql(
+                context.Configuration.GetValue<string>("Ryba:ConnectionString"),
+                options => options.MigrationsAssembly("Ryba.Data")))
+        .AddDiscordCommands(enableSlash: true)
+        .AddCommandTree()
+        .Finish()
+        .AddPostExecutionEvent<Ryba.Bot.PostEvent>()
+        .AddSingleton<FluentLocalizationService>())
     .ConfigureLogging(c => c.AddConsole()
         .AddFilter("System.Net.Http.HttpClient.*.LogicalHandler", LogLevel.Warning)
         .AddFilter("System.Net.Http.HttpClient.*.ClientHandler", LogLevel.Warning))
@@ -57,19 +54,11 @@ if (debugServerString is not null)
 
 var slashService = services.GetRequiredService<SlashService>();
 
-var checkSlashSupport = slashService.SupportsSlashCommands();
-if (!checkSlashSupport.IsSuccess)
+var updateSlash = await slashService.UpdateSlashCommandsAsync(debugServer);
+if (!updateSlash.IsSuccess)
 {
-    log.LogWarning("The registered commands of the bot don't support slash commands: {Reason}",
-        checkSlashSupport.Error?.Message);
+    log.LogWarning("Failed to update slash commands: {Reason}", updateSlash.Error?.Message);
 }
-else
-{
-    var updateSlash = await slashService.UpdateSlashCommandsAsync(debugServer);
-    if (!updateSlash.IsSuccess)
-    {
-        log.LogWarning("Failed to update slash commands: {Reason}", updateSlash.Error?.Message);
-    }
-}
+
 
 await host.RunAsync();

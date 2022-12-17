@@ -8,9 +8,8 @@ using System.Globalization;
 CultureInfo.DefaultThreadCurrentCulture = new(FluentLocalizationService.DefaultLanguage);
 
 var builder = WebApplication.CreateBuilder(args);
-var locService = new FluentLocalizationService();
 // Add services to the container.
-builder.Services.AddSingleton(locService);
+builder.Services.AddSingleton<FluentLocalizationService>();
 builder.Services.AddLocalization();
 
 builder.Services.AddDbContextFactory<RybaContext>(opt => opt.UseNpgsql(
