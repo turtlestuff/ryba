@@ -7,11 +7,11 @@ namespace Ryba.Data;
 
 public class FluentLocalizationService
 {
-    public static readonly string DefaultLanguage = "en";
+    public const string DefaultLanguage = "en";
 
-    readonly ILogger<FluentLocalizationService>? logger;
-    readonly CultureInfo fallbackLang = new(DefaultLanguage);
-    readonly ImmutableDictionary<CultureInfo, MessageContext> messageContexts;
+    readonly ILogger<FluentLocalizationService>? _logger;
+    readonly CultureInfo _fallbackLang = new(DefaultLanguage);
+    readonly ImmutableDictionary<CultureInfo, MessageContext> _messageContexts;
 
     public string this[string id, params (string Argument, object Value)[] args]
      => this[CultureInfo.CurrentCulture, id, args];
@@ -23,10 +23,10 @@ public class FluentLocalizationService
     {
         get
         {
-            var currentLang = lang ?? fallbackLang;
+            var currentLang = lang ?? _fallbackLang;
             while (true)
             {
-                if (messageContexts.TryGetValue(currentLang, out var mc) && mc.HasMessage(id))
+                if (_messageContexts.TryGetValue(currentLang, out var mc) && mc.HasMessage(id))
                 {
                     var msg = mc.GetMessage(id);
                     Dictionary<string, object>? argsDict = null;
@@ -35,38 +35,35 @@ public class FluentLocalizationService
 
                     return mc.Format(msg, argsDict);
                 }
+
+                if (Equals(currentLang.Parent, CultureInfo.InvariantCulture))
+                {
+                    if (Equals(currentLang, _fallbackLang))
+                    {
+                        _logger?.Log(LogLevel.Debug, $"Missing key [{id}]!");
+                        return $"!{id}!" + string.Join("; ", args.Select(x => $"({x.Argument}: {x.Value})")); //no message found
+                    }
+                    currentLang = _fallbackLang;
+                }
                 else
                 {
-                    if (currentLang.Parent == CultureInfo.InvariantCulture)
-                    {
-                        if (currentLang == fallbackLang)
-                        {
-                            logger?.Log(LogLevel.Warning, $"Missing key [{id}]!");
-                            return $"!{id}!" + string.Join("; ", args.Select(x => $"({x.Argument}: {x.Value})")); //no message found
-                        }
-                        currentLang = fallbackLang;
-                    }
-                    else
-                    {
-                        currentLang = currentLang.Parent;
-                    }
-                    continue;
+                    currentLang = currentLang.Parent;
                 }
             }
         }
     }
 
-    public IEnumerable<CultureInfo> AvailableLanguages => messageContexts.Keys.OrderBy(c => c.Name);
+    public IEnumerable<CultureInfo> AvailableLanguages => _messageContexts.Keys.OrderBy(c => c.Name);
 
     public FluentLocalizationService(ILogger<FluentLocalizationService> logger) : this()
     {
-        this.logger = logger;
+        this._logger = logger;
     }
 
     public FluentLocalizationService()
     {   
         var assembly = GetType().Assembly;
-        var resPrefix = "Ryba.Data.Localizations.";
+        const string resPrefix = "Ryba.Data.Localizations.";
         var locPaths = assembly.GetManifestResourceNames()
             .Where(x => x.StartsWith(resPrefix) && x.EndsWith(".ftl"));
 
@@ -82,8 +79,8 @@ public class FluentLocalizationService
             if(errors is not null && errors.Count > 0)
                 throw new AggregateException("Parsing of Fluent translation files has failed.", errors);
 
-            msgCtxs.TryAdd(new(cultureName), mc);
+            msgCtxs.TryAdd(new CultureInfo(cultureName), mc);
         }
-        messageContexts = msgCtxs.ToImmutableDictionary();
+        _messageContexts = msgCtxs.ToImmutableDictionary();
     }
 }

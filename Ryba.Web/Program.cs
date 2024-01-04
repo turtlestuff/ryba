@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Ryba.Data;
 using System.Globalization;
 
-CultureInfo.DefaultThreadCurrentCulture = new(FluentLocalizationService.DefaultLanguage);
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(FluentLocalizationService.DefaultLanguage);
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -15,6 +15,7 @@ builder.Services.AddLocalization();
 builder.Services.AddDbContextFactory<RybaContext>(opt => opt.UseNpgsql(
                         builder.Configuration["Ryba:ConnectionString"],
                         opt => opt.MigrationsAssembly("Ryba.Data")));
+
 builder.Services
     .AddAuthentication(opt =>
     {
@@ -24,8 +25,10 @@ builder.Services
     .AddCookie()
     .AddDiscord(opt =>
     {
-        opt.ClientId = builder.Configuration["Ryba:ClientId"];
-        opt.ClientSecret = builder.Configuration["Ryba:ClientSecret"];
+        opt.ClientId = builder.Configuration["Ryba:ClientId"] ??
+                       throw new InvalidOperationException("Please set ClientId.");
+        opt.ClientSecret = builder.Configuration["Ryba:ClientSecret"] ??
+                           throw new InvalidOperationException("Please set ClientSecret.");
         opt.ClaimActions.MapCustomJson("urn:discord:avatar:url",
             u => $"https://cdn.discordapp.com/avatars/{u.GetString("id")}/{u.GetString("avatar")}." +
             (u.GetString("avatar")?.StartsWith("a_") ?? false ? "gif" : "png"));

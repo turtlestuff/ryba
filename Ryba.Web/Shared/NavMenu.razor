@@ -26,7 +26,7 @@
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="@context.User.FindFirst("urn:discord:avatar:url")?.Value" alt="" width="32" height="32" class="rounded-circle me-2">
                     <span class="text-truncate">
-                        @context.User.FindFirst(ClaimTypes.Name)?.Value&num;@context.User.FindFirst("urn:discord:user:discriminator")?.Value
+                        @context.User.FindFirst(ClaimTypes.Name)?.Value
                     </span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser" style="">

@@ -4,8 +4,8 @@ using System.Security.Claims;
 
 namespace Ryba.Web.Extensions;
 
-public static class DbExtensions
+static class DbExtensions
 {
-    public static RybaUser GetOrCreateUser(this RybaContext db, ClaimsPrincipal user) =>
-        db.GetOrCreateUser(user.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+    public static Task<RybaUser> GetOrCreateUserAsync(this RybaContext db, ClaimsPrincipal user) =>
+        db.GetOrCreateUserAsync(user.FindFirst(ClaimTypes.NameIdentifier)!.Value);
 }

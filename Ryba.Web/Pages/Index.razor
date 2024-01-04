@@ -10,7 +10,7 @@
 		<span>@Tr["web-select-language"]</span>
 		<select aria-label="@Tr["web-select-language"]"
 			class="form-select mt-1" value="@CultureInfo.CurrentCulture" 
-            @onchange="@(async e => await UpdateLang((string) e.Value!))">
+            @onchange="@(async e => await UpdateLanguage((string) e.Value!))">
 
 			@foreach (var c in Tr.AvailableLanguages) {
 				<option value="@c">@c.NativeName (@c.Name)</option>

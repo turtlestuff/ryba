@@ -24,3 +24,6 @@ web-sign-out = Sair
     
 web-select-language = Selecionar linguagem:
 web-welcome = Bem-vindo a { -name }!
+
+web-pins = Mensagens fixadas
+web-configuration = Configuração

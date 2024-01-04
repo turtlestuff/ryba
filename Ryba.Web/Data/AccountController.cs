@@ -6,14 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ryba.Web.Data;
 [Route("[controller]/[action]")] // Microsoft.AspNetCore.Mvc.Route
-public class AccountController : ControllerBase
+public class AccountController(IDataProtectionProvider provider) : ControllerBase
 {
-    public IDataProtectionProvider Provider { get; }
-
-    public AccountController(IDataProtectionProvider provider)
-    {
-        Provider = provider;
-    }
+    public IDataProtectionProvider Provider { get; } = provider;
 
     [HttpGet]
     public IActionResult Login(string returnUrl = "/") =>

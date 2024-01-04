@@ -23,11 +23,10 @@ var host = Host.CreateDefaultBuilder(args)
         .AddDbContext<RybaContext>(
             options => options.UseNpgsql(
                 context.Configuration.GetValue<string>("Ryba:ConnectionString"),
-                options => options.MigrationsAssembly("Ryba.Data")))
+                pgOptions => pgOptions.MigrationsAssembly("Ryba.Data")))
         .AddDiscordCommands(enableSlash: true)
         .AddCommandTree()
         .Finish()
-        .AddPostExecutionEvent<Ryba.Bot.PostEvent>()
         .AddSingleton<FluentLocalizationService>())
     .ConfigureLogging(c => c.AddConsole()
         .AddFilter("System.Net.Http.HttpClient.*.LogicalHandler", LogLevel.Warning)
@@ -60,5 +59,5 @@ if (!updateSlash.IsSuccess)
     log.LogWarning("Failed to update slash commands: {Reason}", updateSlash.Error?.Message);
 }
 
-
 await host.RunAsync();
+

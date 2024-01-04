@@ -10,15 +10,15 @@ namespace Ryba.Web.Data;
 [Route("[controller]/[action]")]
 public class LanguageController : Controller
 {
-    readonly IDbContextFactory<RybaContext> rbCtxFac;
+    readonly IDbContextFactory<RybaContext> _rbCtxFac;
 
     public LanguageController(IDbContextFactory<RybaContext> r, AuthenticationStateProvider a)
     {
-        rbCtxFac = r;
+        _rbCtxFac = r;
     }
 
     [Authorize]
-    public async Task<IActionResult> Set(string? culture, string redirectUri)
+    public Task<IActionResult> Set(string? culture, string redirectUri)
     {
         if (culture is not null)
         {
@@ -28,6 +28,6 @@ public class LanguageController : Controller
                     new RequestCulture(culture, culture)));
         }
 
-        return LocalRedirect(redirectUri);
+        return Task.FromResult<IActionResult>(LocalRedirect(redirectUri));
     }
 }

@@ -23,3 +23,6 @@ web-sign-out = Sign out
     
 web-select-language = Select language:
 web-welcome = Welcome to { -name }!
+
+web-pins = Pins
+web-configuration = Configuration

@@ -1,4 +1,4 @@
-﻿@inject IDbContextFactory<RybaContext> RybaCtxFac
+﻿@inject IDbContextFactory<RybaContext> RybaContextFactory
 @inject NavigationManager Nav
 @inject FluentLocalizationService Tr
 @code {
@@ -11,25 +11,25 @@
         var user = authState.User;
         if (authState?.User.Identity?.IsAuthenticated ?? false)
         {
-            var dbCtx = await RybaCtxFac.CreateDbContextAsync();
-            var dbUser = dbCtx.GetOrCreateUser(user);
-            await UpdateLang(dbUser.Language);
+            var dbCtx = await RybaContextFactory.CreateDbContextAsync();
+            var dbUser = await dbCtx.GetOrCreateUserAsync(user);
+            await UpdateLanguage(dbUser.Language);
         }
         await base.OnInitializedAsync();
     }
 
-    protected async Task UpdateLang(string incoming)
+    protected async Task UpdateLanguage(string incoming)
     {
         var lang = incoming;
-        if (!Tr.AvailableLanguages.Select(x => x.Name).Any(x => x == incoming))
+        if (Tr.AvailableLanguages.Select(x => x.Name).All(x => x != incoming))
             lang = FluentLocalizationService.DefaultLanguage;
 
         var authState = await AuthStateTask;
         var user = authState.User;
         if (authState?.User.Identity?.IsAuthenticated ?? false)
         {
-            var dbCtx = await RybaCtxFac.CreateDbContextAsync();
-            var dbUser = dbCtx.GetOrCreateUser(user);
+            var dbCtx = await RybaContextFactory.CreateDbContextAsync();
+            var dbUser = await dbCtx.GetOrCreateUserAsync(user);
             dbUser.Language = lang;
             dbCtx.Update(dbUser);
             await dbCtx.SaveChangesAsync();
